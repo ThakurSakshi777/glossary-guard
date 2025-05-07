@@ -1,0 +1,66 @@
+/* List Page Styles */
+.logo-img {
+    width: 60px;
+    height: auto;
+}
+
+.food-card {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+    padding: 1.2rem;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+}
+
+.status {
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.status.active {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+}
+
+.status.expired {
+    background-color: #ffcdd2;
+    color: #c62828;
+}
+
+.countdown {
+    font-size: 0.85rem;
+    color: #666;
+    font-family: monospace;
+}
+
+.btn-group .btn {
+    padding: 0.25rem 0.5rem;
+    border-radius: 20px;
+}
+
+.footer-logo {
+    width: 80px;
+    height: auto;
+}
+
+#emptyState {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .food-card {
+        margin-bottom: 1rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+}

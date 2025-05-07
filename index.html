@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <title>Food Expiry Reminder System</title>
+    <meta name="description" content="Track food expiry dates and reduce waste with our smart reminder system">
+    <meta name="keywords" content="food waste, expiry tracker, food management, reminder system">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#198754">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success py-3">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="logo.webp" alt="Logo" class="d-inline-block align-text-top logo-img" loading="lazy"
+                        decoding="async">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <a class="nav-link active" href="index.html">Home</a>
+                        <a class="nav-link" href="list.html">
+                            List <span class="badge bg-danger" id="expiringSoonBadge">0</span>
+                        </a>
+                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" href="contact.html">Contact us</a>
+                        <a class="nav-link" href="help.html">Help</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+
+                        <a class="btn btn-outline-light me-2" href="login.html">Login</a>
+                        <a class="btn btn-warning" href="signup.html">Signup</a>
+                        <a id="Aichat" class="btn btn-outline-light me-2" href="AiChat.html">💬 Chat with us</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow-1 py-5 main-bg">
+        <div class="container">
+            <div id="loadingSpinner" class="d-none text-center py-3">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div class="text-center mb-5">
+                <img src="logo.webp" alt="Fresh Vegetables" class="img-fluid logo-main animate-float" loading="lazy"
+                    decoding="async">
+            </div>
+
+            <div class="text-center mb-5 animate-fadein">
+                <h1 class="display-4 fw-bold text-success mb-3">Grocery Guard</h1>
+                <h1 class="display-4 fw-bold text-success mb-3">Don't Waste Food</h1>
+                <p class="lead text-light fs-4">Save food, save lives. Every bite counts!</p>
+                <p class="text-light">Track your food items and reduce waste with our smart expiry reminder system</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="bg-white rounded-3 p-4 shadow-lg mb-5">
+                        <h2 class="text-center mb-4 text-success">Add Food Item</h2>
+                        <form id="foodForm">
+                            <div class="mb-3">
+                                <label for="item" class="form-label">Item Name</label>
+                                <input type="text" class="form-control form-control-lg" id="item"
+                                    placeholder="Enter food item/Product ID" required>
+                                <div class="invalid-feedback">Please enter a valid food item name</div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="quantity" class="form-label">Quantity</label>
+                                        <input type="number" class="form-control" id="quantity" min="1" value="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="category" class="form-label">Category</label>
+                                        <select class="form-select" id="category">
+                                            <option value="dairy">🧀 Dairy</option>
+                                            <option value="vegetables">🥦 Vegetables</option>
+                                            <option value="fruits">🍎 Fruits</option>
+                                            <option value="meat">🥩 Meat</option>
+                                            <option value="seafood">🐟 Seafood</option>
+                                            <option value="frozen">❄️ Frozen Foods</option>
+                                            <option value="baked">🍞 Bakery Items</option>
+                                            <option value="snacks">🍿 Snacks</option>
+                                            <option value="beverages">🥤 Beverages</option>
+                                            <option value="leftovers">🍱 Leftovers</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="date" class="form-label">Expiry Date</label>
+                                <input type="date" class="form-control form-control-lg" id="date" required>
+                                <div class="invalid-feedback">Please select an expiry date</div>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100 btn-lg save-btn">Save Item</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4" id="itemsContainer" role="list" aria-live="polite">
+                <!-- Dynamic items will be inserted here -->
+            </div>
+
+            <div class="text-center py-5" id="emptyState">
+                <div class="empty-state-content">
+                    <i class="fas fa-utensils fa-4x text-light mb-3"></i>
+                    <h3 class="text-light">No food items added yet</h3>
+                    <p class="text-light">Start by adding your first item using the form above</p>
+                    <button class="btn btn-warning mt-3 scroll-to-form">Add First Item</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="cookie-consent fixed-bottom bg-dark text-white p-3 d-none">
+        <div class="container">
+            <p class="mb-2">We use cookies to enhance your experience.
+                <a href="/privacy.html" class="text-warning">Learn more</a>
+            </p>
+            <button class="btn btn-sm btn-warning" id="acceptCookies">Accept</button>
+        </div>
+    </div>
+
+    <footer class="bg-success text-white py-4 mt-auto">
+        <div class="container">
+            <div class="text-center mb-3">
+                <img src="logo.webp" alt="Logo" class="footer-logo" loading="lazy">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <div class="mb-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    </div>
+                    <p class="mb-2">
+                        <a href="#" class="text-white text-decoration-none me-3">Conditions of Use</a>
+                        <a href="#" class="text-white text-decoration-none me-3">Privacy Notice</a>
+                        <a href="#" class="text-white text-decoration-none">Your Ads Privacy Choices</a>
+                    </p>
+                    <p class="mb-0">&copy; 2025 Food Expiry Reminder. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+
+        // Cookie Consent Logic
+        document.getElementById('acceptCookies').addEventListener('click', function () {
+            document.querySelector('.cookie-consent').classList.add('d-none');
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>

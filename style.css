@@ -1,0 +1,155 @@
+:root {
+    --bs-success-rgb: 76, 175, 80;
+}
+
+body {
+    background-color: #f7f7f7;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+#Aichat{
+    margin-left: 0.8rem;
+}
+.main-bg {
+    background-image: url('foody.jpg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.logo-img {
+    width: 60px;
+    height: auto;
+}
+
+.logo-main {
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    width: 100px;
+    height: auto;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-fadein {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.save-btn {
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #FFA500, #FFD700);
+    border: none;
+}
+
+.save-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4);
+}
+
+.food-card {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
+}
+
+.food-card.expiring-soon {
+    border-left: 4px solid #ffc107;
+}
+
+.food-card.expired {
+    border-left: 4px solid #dc3545;
+}
+
+.delete-btn {
+    background-color: #ff6b6b;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.delete-btn:hover {
+    background-color: #ff4c4c;
+}
+
+.expiry-progress {
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #e0e0e0;
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #4CAF50, #81C784);
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.expired .progress-bar {
+    background: #ef5350;
+}
+
+.countdown {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-family: monospace;
+}
+
+.countdown-text {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: rgba(0,0,0,0.05);
+}
+
+#emptyState {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+#emptyState i {
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+        padding-top: 1rem;
+    }
+    
+    .main-bg {
+        background-position: 60% center;
+    }
+    
+    .logo-main {
+        max-width: 150px;
+    }
+    
+    .food-card {
+        padding: 1rem;
+    }
+}
